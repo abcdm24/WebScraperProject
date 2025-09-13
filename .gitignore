@@ -1,0 +1,29 @@
+# Virtual environment
+venv/
+.env/
+ENV/
+env/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pkl
+
+# Distribution / packaging
+*.egg
+*.egg-info/
+dist/
+build/
+
+# IDE / Editor settings
+.idea/
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# SQLite database (optional — keep if you want DB in repo)
+*.sqlite3
