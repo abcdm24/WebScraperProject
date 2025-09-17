@@ -2,17 +2,19 @@ name: WebScraperProject CI
 
 on:
   push:
-    branches: {"main"}
+    branches:
+      - main
   pull_request:
-    branches: {"main"}
+    branches:
+      - main
 
 jobs:
    test:
-     runs_on: ubuntu-latest
+     runs-on: ubuntu-latest
 
      strategy:
        matrix:
-         python-version: {"3.9", "3.10", "3.11"}
+         python-version: ["3.9", "3.10", "3.11"]
 
      steps:
        - name: Checkout code
@@ -29,5 +31,4 @@ jobs:
            if [ -f requirement.txt ]; then pip install -r requirements.txt; fi
 
        - name: Run tests with pytest
-         run: |
-           pytest --maxfail=1 --disable-warnings -q
+         run: pytest --maxfail=1 --disable-warnings -q
