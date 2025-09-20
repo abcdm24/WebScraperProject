@@ -3,17 +3,26 @@ from urllib.parse import urljoin
 
 
 def parse_links(html: str) -> list[str]:
-    soup = BeautifulSoup(html,"html.parser")
+    soup = BeautifulSoup(html, "html.parser")
     return [a["href"] for a in soup.find_all("a", href=True)]
 
 
 def extract_links(html: str, base_url: str = "") -> list[str]:
     """extract all links from HTML and return absolute URLs."""
-    soup = BeautifulSoup(html,"html.parser")
+    soup = BeautifulSoup(html, "html.parser")
     links = []
     for a in soup.find_all("a", href=True):
         abs_url = urljoin(base_url, a["href"])
         links.append(abs_url)
+    return links
+
+
+def extract_links1(html: dict, base_url: str = "") -> list[str]:
+    """extract all links from HTML and return absolute URLs."""
+    links = []
+    for key, html in html.items():
+        urls = extract_links(html, base_url)
+        links.extend(urls)
     return links
 
 
@@ -64,4 +73,3 @@ def extract_images(html: str, base_url: str = "") -> list[str]:
         abs_url = urljoin(base_url, img["src"])
         images.append(abs_url)
     return images
-

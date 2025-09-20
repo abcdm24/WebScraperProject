@@ -1,6 +1,6 @@
 # import pytest
 from src.scraper.static_scraper import StaticScraper
-import src.scraper.scraper as scraper_module
+import src.scraper.web_scraper as scraper_module
 
 
 def test_static_scraper_returns_dict(monkeypatch, fake_html_response):

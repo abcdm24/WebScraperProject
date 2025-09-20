@@ -1,4 +1,4 @@
-from .scraper import WebScraper
+from .web_scraper import WebScraper
 
 
 class StaticScraper(WebScraper):
