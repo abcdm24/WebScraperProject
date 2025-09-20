@@ -31,6 +31,6 @@ class WebScraper(BaseScraper):
     def scrape(self) -> dict:
         response = requests.get(self.url)
         response.raise_for_status()
-        soup =  BeautifulSoup(response.text, "html.parser")
+        soup = BeautifulSoup(response.text, "html.parser")
         links = [a["href"] for a in soup.find_all("a", href=True)]
         return {"url": self.url, "links": links}

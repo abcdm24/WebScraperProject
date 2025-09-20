@@ -1,6 +1,12 @@
+# import requests
+# from bs4 import BeautifulSoup
+import argparse
 import requests
-from bs4 import BeautifulSoup
-import pandas as pd
+# from pathlib import Path
+
+from src.utils import parser, storage
+# from scraper import WebScraper
+# import pandas as pd
 
 # First Basic Scraper
 # url ="https://quotes.toscrape.com"
@@ -20,22 +26,68 @@ import pandas as pd
 #
 # print("scraped", len(quotes), "quotes")
 
-page = 1
-all_quotes = []
+# multi page scraping
 
-while True:
-    url = f"https://quotes.toscrape.com/page/{page}/"
-    response = requests.get(url)
-    if "No quotes found!" in response.text:
-        break
-    soup = BeautifulSoup(response.text, "html.parser")
-    for q in soup.find_all("div", class_="quote"):
-        text = q.find("span", class_="text").get_text()
-        author = q.find("small", class_="author").get_text()
-        tags = [tag.get_text() for tag in q.find_all("a", class_="tag")]
-        all_quotes.append({"text": text, "author": author, "tags": tags})
+# page = 1
+# all_quotes = []
+#
+# while True:
+#     url = f"https://quotes.toscrape.com/page/{page}/"
+#     response = requests.get(url)
+#     if "No quotes found!" in response.text:
+#         break
+#     soup = BeautifulSoup(response.text, "html.parser")
+#     for q in soup.find_all("div", class_="quote"):
+#         text = q.find("span", class_="text").get_text()
+#         author = q.find("small", class_="author").get_text()
+#         tags = [tag.get_text() for tag in q.find_all("a", class_="tag")]
+#         all_quotes.append({"text": text, "author": author, "tags": tags})
+#
+#     page += 1
+#
+# print("Scraped total:", len(all_quotes))
 
-    page += 1
 
-print("Scraped total:", len(all_quotes))
+def scrape_static(url: str, output: str):
+    """Fetch a static page and save extracted data to JSON."""
+    print(f"Fetching {url}...")
+    response = requests.get(url, timeout=10)
+    response.raise_for_status()
 
+    html = response.text
+
+    data = {
+        "url": url,
+        "metadata": parser.extract_metadata(html, base_url=url),
+        "headings": parser.extract_headings(html),
+        "links": parser.extract_links(html, base_url=url),
+        "images": parser.extract_images(html, base_url=url)
+    }
+
+    storage.save_json(data, output)
+    print(f"✅ Save results to {output}")
+
+
+def main():
+    parser_cli = argparse.ArgumentParser(description="WebScraper CLI")
+    subparsers = parser_cli.add_subparsers(dest="command")
+
+    static_parser = subparsers.add_parser("static", help="Scrape a static web page")
+    static_parser.add_argument("url", help="URL to scrape")
+    static_parser.add_argument(
+        "--output",
+        "-o",
+        default="output.json",
+        help="Path to save JSON results (default: output.json)",
+    )
+
+    args = parser_cli.parse_args()
+
+    if args.command == "static":
+        scrape_static(args.url, args.output)
+    else:
+        parser_cli.print_help()
+
+
+if __name__ == "__main__":
+    main()
