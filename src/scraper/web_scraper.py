@@ -61,4 +61,4 @@ class WebScraper:
         elif self.scraper_type == "api":
             return ApiScraper(self.url, self.output).scrape()
         else:
-            return ValueError(f"Unknown scraper type: {self.scraper_type}")
+            raise ValueError(f"Unknown scraper type: {self.scraper_type}")
