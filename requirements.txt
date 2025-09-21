@@ -29,3 +29,12 @@ tzdata==2025.2
 urllib3==2.5.0
 wheel==0.45.1
 pytest==8.4.2
+lxml
+selenium
+chromedriver-autoinstaller
+fastapi
+uvicorn[standard]
+pytest
+httpx
+python-dotenv
+pydantic
