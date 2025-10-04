@@ -1,0 +1,19 @@
+<mat-card>
+  <mat-card-title>Upload URL</mat-card-title>
+  <mat-card-content>
+    <form>
+      <mat-form-field appearance="outline" style="width: 100%">
+        <mat-label>Enter URL</mat-label>
+        <input matInput placeHolder="Enter URL" [(ngModel)]="url" name="url" />
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+
+  <button mat-raised-button color="primary" (click)="onScrapeStatic()">Scrape Static</button>
+
+  <div *ngIf="output">
+    <mat-card-title>Scrape Result</mat-card-title>
+    <h3>Result</h3>
+    <pre>{{ output | json }}</pre>
+  </div>
+</mat-card>

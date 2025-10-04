@@ -19,7 +19,17 @@ class StaticScraper(BaseScraper):
     """Scraper for static page: {self.url}"""
     def scrape(self) -> str:
         print(f"Fetching static page: {self.url}")
-        response = requests.get(self.url, timeout=10)
+
+        headers = {
+            "user-Agent":(
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64 "
+                "AppleWebKit/537.36 (KHTML, like Gecko) "
+                "Chrome/140.0.0.0 Safari/537.36"
+            )
+        }
+
+        # response = requests.get(self.url, timeout=10)
+        response = requests.get(self.url, headers=headers, timeout=10)
         response.raise_for_status()
         html = response.text
 
@@ -28,7 +38,8 @@ class StaticScraper(BaseScraper):
             "metadata": parser.extract_metadata(html, base_url=self.url),
             "headings": parser.extract_headings(html),
             "links": parser.extract_links(html, base_url=self.url),
-            "images": parser.extract_images(html, base_url=self.url)
+            "images": parser.extract_images(html, base_url=self.url),
+            # "text": parser.extract_text(html)
         }
 
         storage.save_json([data], self.output)

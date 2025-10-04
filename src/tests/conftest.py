@@ -1,5 +1,7 @@
 import pytest
 
+API_PREFIX = "/scraper"
+
 
 @pytest.fixture
 def fake_html():

@@ -5,7 +5,7 @@ import pytest
 from src.scraper.web_scraper import WebScraper
 
 
-def test_webscraper_statis(monkeypatch, fake_html_response, tmp_path):
+def test_webscraper_static(monkeypatch, fake_html_response, tmp_path):
     """WebScraper with 'static' should delegate
     to Static Scraper and save json"""
 

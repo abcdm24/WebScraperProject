@@ -48,7 +48,7 @@ from src.scraper.api_scraper import ApiScraper
 class WebScraper:
     """High-level scraper that selects the right scraper type."""
 
-    def __init__(self, scraper_type: str, url:   str, output: str):
+    def __init__(self, scraper_type: str, url: str, output: str):
         self.scraper_type = scraper_type
         self.url = url
         self.output = output
