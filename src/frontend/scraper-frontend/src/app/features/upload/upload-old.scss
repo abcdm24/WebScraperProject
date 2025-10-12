@@ -1,0 +1,85 @@
+// .upload-container {
+//   max-width: 900px;
+//   margin: 2rem auto;
+//   display: flex;
+//   flex-direction: column;
+//   gap: 2rem;
+// }
+
+// .upload-card {
+//   padding: 2rem;
+//   border-radius: 16px;
+//   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+//   background: linear-gradient(135deg, #f9f9ff 0%, #eef1ff 100%);
+//   text-align: center;
+// }
+
+// .page-title {
+//   font-weight: 600;
+//   color: #3f51b5;
+//   margin-bottom: 1rem;
+// }
+
+// .url-input {
+//   width: 100%;
+//   margin-bottom: 1rem;
+// }
+
+// .result-card {
+//   padding: 1.5rem;
+//   border-radius: 16px;
+//   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+// }
+
+// .result-header {
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   margin-bottom: 1rem;
+// }
+
+// .text-section {
+//   white-space: pre-wrap;
+//   font-size: 0.95rem;
+//   line-height: 1.5;
+//   background: #fafafa;
+//   padding: 10px;
+//   border-radius: 8px;
+// }
+
+// .spinner-container {
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   height: 150px;
+// }
+
+// /* Ensure raised primary buttons follow Material system tokens */
+// button.mat-raised-button[color='primary'],
+// button.mat-raised-button.mat-primary {
+//   /* background and foreground from system tokens */
+//   background-color: var(--mat-sys-color-primary-container) !important;
+//   color: var(--mat-sys-color-on-primary-container) !important;
+//   border: none;
+//   box-shadow: var(--mat-elevation-3); /* optional: keep elevation */
+// }
+
+// /* Icon color inside the button */
+// button.mat-raised-button[color='primary'] .mat-icon,
+// button.mat-raised-button.mat-primary .mat-icon {
+//   color: var(--mat-sys-color-on-primary-container) !important;
+// }
+
+// /* Hover/focus states (use container hover tokens if available) */
+// button.mat-raised-button[color='primary']:hover,
+// button.mat-raised-button.mat-primary:hover {
+//   background-color: var(
+//     --mat-sys-color-primary-container-hover,
+//     var(--mat-sys-color-primary-container)
+//   ) !important;
+// }
+
+// /* If you have a small loading spinner inside the button, make it visible on primary */
+// button.mat-raised-button[color='primary'] .mat-progress-spinner {
+//   color: var(--mat-sys-color-on-primary-container) !important;
+// }

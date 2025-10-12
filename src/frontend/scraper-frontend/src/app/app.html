@@ -337,8 +337,50 @@
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * End of Placeholder  * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<nav>
+<!-- <nav>
   <a routerLink="/upload">Upload</a>
-</nav>
+</nav> -->
 
-<router-outlet></router-outlet>
+<!--//////////////ineline with theme mode - Start///////////////////-->
+<!-- <mat-toolbar color="primary">
+  <span class="app-title">Smart Scraper</span>
+  <span class="spacer"></span>
+  <button
+    mat-icon-button
+    (click)="toggleTheme()"
+    aria-label="Toggle theme"
+    [matTooltip]="isDark ? 'Light mode' : 'Dark mode'"
+  >
+    <mat-icon>{{ isDark ? 'light_mode' : 'dark_mode' }}</mat-icon>
+  </button>
+  <!-- <mat-slide-toggle (change)="toggleTheme($event.checked)" [checked]="isDark">
+    <mat-icon>{{ isDark ? 'dark_mode' : 'light_mode' }}</mat-icon>
+  </mat-slide-toggle> -->
+<!--</mat-toolbar>
+
+<router-outlet></router-outlet> -->
+<!--//////////////ineline with theme mode - End///////////////////-->
+<!-- app.html -->
+<div class="app-root" [class.dark-mode]="isDark">
+  <mat-toolbar class="app-toolbar" role="banner">
+    <div class="toolbar-left">
+      <mat-icon>language</mat-icon>
+      <span class="app-title">Smart Scraper</span>
+    </div>
+
+    <span class="spacer"></span>
+
+    <button
+      mat-icon-button
+      (click)="toggleTheme()"
+      [matTooltip]="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
+      aria-label="Toggle theme"
+    >
+      <mat-icon aria-hidden="false">{{ isDark ? 'light_mode' : 'dark_mode' }}</mat-icon>
+    </button>
+  </mat-toolbar>
+
+  <main class="app-main">
+    <router-outlet></router-outlet>
+  </main>
+</div>

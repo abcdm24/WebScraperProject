@@ -1,3 +1,5 @@
+import tempfile
+import json
 import pytest
 from fastapi.testclient import TestClient
 from src.backend.main import app
@@ -5,21 +7,31 @@ from src.tests.conftest import API_PREFIX
 
 client = TestClient(app)
 
+
+def create_temp_json(data: dict) -> str:
+    """Helper to create a temprary JSON file and return its path."""
+    tmp = tempfile.NamedTemporaryFile(delete=False, suffix=".json", mode="w", encoding="utf-8")
+    json.dump(data, tmp)
+    tmp.close()
+    return tmp.name
+
 # --- Success + Error parametrized tests ---
 
 
 @pytest.mark.parametrize(
-    "endpoint, service_name, mock_return, request_url",
+    "endpoint, service_name, test_data, request_url",
     [
-        ("static", "scrape_static_service", "static_output.json", "https://example.com"),
-        ("dynamic", "scrape_dynamic_service", "dynamic_output.json", "https://example.com"),
-        ("api", "scrape_api_service", "api_output.json", "https://jsonplaceholder.typicode.com/todos/1"),
+        ("static", "scrape_static_service", {"title": "Static Test"}, "https://example.com"),
+        ("dynamic", "scrape_dynamic_service", {"title": "Dynamic Test"}, "https://example.com"),
+        ("api", "scrape_api_service", {"result": "API Test"}, "https://jsonplaceholder.typicode.com/todos/1"),
     ],
 )
-def test_scraper_success(monkeypatch, endpoint, service_name, mock_return, request_url):
+def test_scraper_success(monkeypatch, endpoint, service_name, test_data, request_url):
     """Test that scraper endpoints return success when service works"""
+    tmp_file = create_temp_json(test_data)
+
     def mock_service(url: str) -> str:
-        return mock_return
+        return tmp_file
 
     monkeypatch.setattr(f"src.backend.routes.scraper_routes.{service_name}", mock_service)
 
@@ -28,7 +40,7 @@ def test_scraper_success(monkeypatch, endpoint, service_name, mock_return, reque
 
     assert response.status_code == 200
     assert data["status"] == "success"
-    assert data["output"] == mock_return
+    assert data["data"] == test_data
 
 
 # --- Error cases ---
@@ -55,4 +67,5 @@ def test_scraper_error(monkeypatch, endpoint, service_name, exception, message, 
 
     assert response.status_code == 200
     assert data["status"] == "error"
-    assert message in data["output"]
+    assert data["data"] is None
+    assert message in data["error"]

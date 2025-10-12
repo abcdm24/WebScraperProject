@@ -1,3 +1,4 @@
+import json
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, HttpUrl
 from src.backend.services.scraper_services import (
@@ -5,7 +6,7 @@ from src.backend.services.scraper_services import (
     scrape_dynamic_service,
     scrape_api_service
 )
-from src.tests.conftest import API_PREFIX
+# from src.tests.conftest import API_PREFIX
 
 # from src.utils.config import DATA_DIR_PROCESSED
 router = APIRouter()
@@ -21,23 +22,46 @@ class ScrapeRequestAPI(BaseModel):
     url: str = "https://jsonplaceholder.typicode.com/todos/1"
 
 
+# class ScrapeResponse(BaseModel):
+#     status: str
+#     output: str
+
 class ScrapeResponse(BaseModel):
     status: str
-    output: str
+    data: dict | None = None
+    error: str | None = None
+
+
+# def wrap_response(func, url: str) -> ScrapeResponse:
+#     """
+#     Helper to ensure consistent success/error response.
+#
+#     """
+#     try:
+#         result_path = func(url)
+#         return ScrapeResponse(status="success", output=result_path)
+#     except Exception as e:
+#         return ScrapeResponse(status="error", output=str(e))
+
+
+def load_scraped_json(file_path):
+    with open(file_path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+        if isinstance(data, list):
+            return data[0] if len(data) > 0 else {}
+        return data
 
 
 def wrap_response(func, url: str) -> ScrapeResponse:
     """
-    Helper tp ensure consistent success/error response.
-    :param func:
-    :param url:
-    :return:
+    Helper to ensure consistent success/error response.
     """
     try:
         result_path = func(url)
-        return ScrapeResponse(status="success", output=result_path)
+        content = load_scraped_json(result_path)
+        return ScrapeResponse(status="success", data=content)
     except Exception as e:
-        return ScrapeResponse(status="error", output=str(e))
+        return ScrapeResponse(status="error", error=str(e), data=None)
 
 
 @router.post("/static", response_model=ScrapeResponse)

@@ -1,0 +1,258 @@
+// // .app-toolbar {
+// //   display: flex;
+// //   justify-content: space-between;
+// //   padding: 0 1rem;
+// //   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+// // }
+
+// // .toolbar-left {
+// //   display: flex;
+// //   align-items: center;
+// //   gap: 0.5rem;
+// // }
+
+// // .app-title {
+// //   font-weight: 600;
+// //   font-size: 1.3rem;
+// // }
+
+// // .spacer {
+// //   flex: 1 1 auto;
+// // }
+
+// // mat-toolbar.mat-primary {
+// //   background: linear-gradient(135deg, #3f51b5, #5c6bc0);
+// // }
+
+// /////////////////////////////////ineline with theme mode - Start///////////////////
+// .app-toolbar {
+//   background: linear-gradient(135deg, var(--mat-sys-primary), var(--mat-sys-secondary));
+
+//   color: var(--mat-sys-on-primary);
+// }
+
+// .app-title {
+//   font: var(--mat-sys-title-large);
+//   /* Inherits color (on-primary) from toolbar */
+// }
+
+// .spacer {
+//   flex: 1 1 auto;
+// }
+// /////////////////////////////////ineline with theme mode - End///////////////////
+
+// /* app.scss
+//    Theme-aware app styles.
+//    - The top-level .app-root toggles dark visuals using .dark-mode
+//    - Light mode: soft light-blue gradient
+//    - Dark mode: rich dark-gray gradient
+//    - Smooth transitions for background and color for pleasant toggling
+// */
+
+// /* Root container that fills viewport and switches theme via .dark-mode */
+// .app-root {
+//   min-height: 100vh;
+//   display: flex;
+//   flex-direction: column;
+//   transition: background 300ms ease, color 300ms ease;
+//   /* Light-mode page background (soft bluish) */
+//   background: linear-gradient(180deg, #f5fbff 0%, #e3f7ff 100%);
+//   color: #07203a; /* dark blue-ish text for light background */
+
+//   /* Toolbar layout */
+//   .app-toolbar {
+//     display: flex;
+//     align-items: center;
+//     padding: 0 1rem;
+//     height: 64px;
+//     box-shadow: 0 4px 10px rgba(15, 23, 42, 0.06);
+//     border-bottom: 1px solid rgba(11, 32, 58, 0.04);
+
+//     /* Light-mode toolbar gradient (blue tones) */
+//     background: linear-gradient(90deg, #e1f0ff 0%, #90caf9 100%);
+//     color: #07203a; /* ensures icons/text are readable on light toolbar */
+
+//     .app-title {
+//       font-weight: 600;
+//       font-size: 1.25rem;
+//       letter-spacing: 0.2px;
+//     }
+
+//     .toolbar-left {
+//       display: flex;
+//       align-items: center;
+//       gap: 0.5rem;
+//     }
+
+//     .spacer {
+//       flex: 1 1 auto;
+//     }
+
+//     button[mat-icon-button] {
+//       color: inherit; /* inherit on-toolbar color; icon matches text */
+//     }
+//   } /* end .app-toolbar */
+
+//   .app-main {
+//     flex: 1 1 auto;
+//     padding: 1.25rem;
+//     /* content sits on top of the page background */
+//   }
+
+//   /* --- DARK MODE OVERRIDE --- */
+//   &.dark-mode {
+//     /* Page background for dark mode (subtle gray gradient) */
+//     background: linear-gradient(180deg, #151515 0%, #222222 100%);
+//     color: #e6edf3; /* light text */
+
+//     .app-toolbar {
+//       /* Dark toolbar gradient (dark gray shades) */
+//       background: linear-gradient(90deg, #202020 0%, #2f2f2f 100%);
+//       color: #f5f7fa; /* icons/text on dark toolbar */
+
+//       box-shadow: 0 6px 18px rgba(0, 0, 0, 0.55);
+//       border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+
+//       .app-title {
+//         color: inherit;
+//       }
+
+//       button[mat-icon-button] {
+//         color: inherit;
+//       }
+//     } /* end .app-toolbar (dark) */
+
+//     .app-main {
+//       /* Slightly lift the content area on dark mode to create depth */
+//       background: transparent;
+//     }
+//   } /* end &.dark-mode */
+
+//   /* small responsive tweaks */
+//   @media (max-width: 600px) {
+//     .app-toolbar {
+//       height: 56px;
+//       padding: 0 0.75rem;
+
+//       .app-title {
+//         font-size: 1.05rem;
+//       }
+//     }
+//   }
+// }
+
+.app-root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition: background 200ms ease, color 300ms ease;
+  font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+  font-smooth: always;
+  -webkit-font-something: antialiased;
+
+  background: linear-gradient(180deg, #f6fbff 0%, #e6f3ff 100%);
+  color: #07203a;
+
+  .app-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+    height: 64px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.07);
+    border-bottom: 1px solid rgba(11, 32, 58, 0.05);
+    background: linear-gradient(90deg, #d9ecff 0%, #90caf9 100%);
+    color: #07203a;
+
+    .app-title {
+      font-weight: 700;
+      font-size: 1.3rem;
+      letter-spacing: 0.3px;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      mat-icon {
+        font-size: 1.6rem;
+        color: #2962ff;
+        vertical-align: middle;
+        transform: translateY(1px);
+      }
+    }
+
+    button[mat-icon-button] {
+      color: #07203a;
+      transition: transform 0.2s ease, color 0.3s ease;
+
+      &:hover {
+        transform: scale(1.1);
+        color: #2962ff;
+      }
+    }
+
+    .toolbar-left {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      mat-icon {
+        font-size: 26px;
+        vertical-align: middle;
+      }
+
+      h1,
+      span {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 600;
+        font-size: 1.4rem;
+        margin: 0;
+        color: var(--text-primary);
+      }
+    }
+  }
+
+  .app-main {
+    flex: 1 1 auto;
+    padding: 0.75rem 0.5rem 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    //gap: 1.5rem;
+  }
+
+  &.dark-mode {
+    background: linear-gradient(180deg, #151515 0%, #1e1e1e 100%);
+    color: #1c1c1c; // #e6edf3;
+
+    .app-toolbar {
+      background: linear-gradient(90deg, #202020 0%, 322ee2e 100%);
+      color: #1c1c1c; // #e6edf3;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.55);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+
+      button[mat-icon-button] {
+        color: #e6edf3;
+        &.hover {
+          color: #90caf9;
+        }
+      }
+
+      .app-tilte mat-icon {
+        color: #90caf9;
+      }
+    }
+  }
+
+  @media (max-width: 600px) {
+    .app-toolbar {
+      height: 56px;
+      padding: 0 0.75rem;
+
+      .app-title {
+        font-size: 1.1rem;
+      }
+    }
+  }
+}

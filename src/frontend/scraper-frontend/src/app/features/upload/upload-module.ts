@@ -8,6 +8,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { UploadRoutingModule } from './upload-routing-module';
 import { Upload } from './upload';
 import { MatButton, MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { NgxJsonViewerModule } from 'ngx-json-viewer';
 
 const routes: Routes = [{ path: '', component: Upload }];
 
@@ -22,7 +26,11 @@ const routes: Routes = [{ path: '', component: Upload }];
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    MatIconModule,
+    MatProgressSpinnerModule,
+    MatExpansionModule,
     RouterModule.forChild(routes),
+    NgxJsonViewerModule,
   ],
 })
 export class UploadModule {}

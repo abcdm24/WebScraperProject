@@ -75,11 +75,11 @@ def extract_images(html: str, base_url: str = "") -> list[str]:
     return images
 
 
-# def extract_text(html: str) -> str:
-#     """
-#     Extracts main textual content from HTML.
-#     Currently, fetches all <p> tags and joins them.
-#     """
-#     soup = BeautifulSoup(html, "html.parser")
-#     paragraphs = [p.get_text(strip=True) for p in soup.find_all("p")]
-#     return "\n".join(paragraphs)
+def extract_text(html: str) -> str:
+    """
+    Extracts main textual content from HTML.
+    Currently, fetches all <p> tags and joins them.
+    """
+    soup = BeautifulSoup(html, "html.parser")
+    paragraphs = [p.get_text(strip=True) for p in soup.find_all("p")]
+    return "\n".join(paragraphs)

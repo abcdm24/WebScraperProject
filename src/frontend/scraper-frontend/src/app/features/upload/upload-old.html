@@ -1,4 +1,4 @@
-<div class="upload-page">
+<div class="upload-container">
   <mat-card class="upload-card">
     <h2 class="page-title">
       <mat-icon color="primary">language</mat-icon>
@@ -10,13 +10,7 @@
       <input matInput [(ngModel)]="url" placeholder="https://example.com" />
     </mat-form-field>
 
-    <button
-      mat-raised-button
-      color="primary"
-      class="scrape-button"
-      (click)="onScrapeStatic()"
-      [disabled]="loading"
-    >
+    <button mat-raised-button color="primary" (click)="onScrapeStatic()" [disabled]="loading">
       <mat-icon *ngIf="!loading">cloud_upload</mat-icon>
       <div class="spinner-container" *ngIf="loading">
         <mat-progress-spinner diameter="24" mode="indeterminate"></mat-progress-spinner>

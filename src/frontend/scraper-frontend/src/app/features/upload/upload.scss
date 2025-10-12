@@ -1,0 +1,473 @@
+/* upload.scss
+   Theme-aware upload styles.
+   - Light mode: soft light-blue gradients
+   - Dark mode: dark-gray gradients
+   - Responds to: body.dark-mode, .app-root.dark-mode or .upload-root.dark-mode
+*/
+
+/* Base container (light-mode default) */
+// .upload-root {
+//   .upload-container {
+//     max-width: 900px;
+//     margin: 1rem auto;
+//     display: flex;
+//     flex-direction: column;
+//     gap: 2rem;
+//     padding: 0 1rem;
+//     transition: background 300ms ease, color 300ms ease;
+//   }
+
+//   /* Upload card (light mode gradient) */
+//   .upload-card {
+//     padding: 2rem;
+//     border-radius: 16px;
+//     box-shadow: 0 6px 22px rgba(14, 30, 60, 0.06);
+//     background: linear-gradient(135deg, #f9fbff 0%, #e6f4ff 100%);
+//     text-align: center;
+//     transition: background 300ms ease, box-shadow 300ms ease, color 300ms ease;
+//     //margin-bottom: 1.5rem;
+//     gap: 2rem;
+//   }
+
+//   .page-title {
+//     display: inline-flex;
+//     align-items: center;
+//     gap: 0.5rem;
+//     font-weight: 600;
+//     color: #1565c0; /* light-mode blue */
+//     margin-bottom: 1rem;
+//     font-size: 1.25rem;
+//   }
+
+//   .page-icon {
+//     font-size: 1.4rem;
+//     vertical-align: middle;
+//     color: inherit; /* match title color */
+//   }
+
+//   .url-input {
+//     width: 100%;
+//     margin-bottom: 1rem;
+//   }
+
+//   .scrape-btn {
+//     display: inline-flex;
+//     align-items: center;
+//     gap: 0.5rem;
+//     padding: 0.6rem 1rem;
+//     border-radius: 12px;
+//     transition: transform 150ms ease;
+//   }
+
+//   .scrape-btn:active {
+//     transform: translateY(1px);
+//   }
+
+//   .spinner-container {
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     height: 28px;
+//     width: 28px;
+//   }
+
+//   .result-card {
+//     padding: 0.5rem;
+//     border-radius: 16px;
+//     font-family: 'Poppins', 'Segoe UI', Roboto, sans-serif;
+//     box-shadow: 0 6px 20px rgba(14, 30, 60, 0.05);
+//     background: linear-gradient(180deg, #ffffff 0%, #fbfcff 100%);
+//     transition: background 300ms ease, box-shadow 300ms ease;
+//     //margin-top: 0.5rem;
+//   }
+
+//   .result-header {
+//     display: flex;
+//     justify-content: space-between;
+//     align-items: center;
+//     font-family: 'Poppins', 'Segoe UI', Roboto, sans-serif;
+
+//     margin: 0;
+//     //margin-bottom: 1rem;
+//     flex-wrap: nowrap;
+//     gap: 1rem;
+//     border-width: 1rem;
+//     border-style: dotted;
+//   }
+
+//   .result-header h3 {
+//     margin: 0;
+//     font-size: 1.25rem;
+//     font-weight: 600;
+//     color: var(--mat-sys-color-on-surface, #2c3e50);
+//   }
+
+//   .result-header button {
+//     white-space: nowrap;
+//     flex-shrink: 0;
+//   }
+
+//   .text-section {
+//     white-space: pre-wrap;
+//     font-size: 0.95rem;
+//     line-height: 1.5;
+//     background: #fafbff;
+//     padding: 10px;
+//     border-radius: 8px;
+//     color: #0b2b45;
+//   }
+
+//   /* Material token-based raised primary buttons (keeps your earlier rules) */
+//   button.mat-raised-button[color='primary'],
+//   button.mat-raised-button.mat-primary {
+//     background-color: var(--mat-sys-color-primary-container) !important;
+//     color: var(--mat-sys-color-on-primary-container) !important;
+//     border: none;
+//     box-shadow: var(--mat-elevation-3);
+//   }
+
+//   button.mat-raised-button[color='primary'] .mat-icon,
+//   button.mat-raised-button.mat-primary .mat-icon {
+//     color: var(--mat-sys-color-on-primary-container) !important;
+//   }
+
+//   button.mat-raised-button[color='primary']:hover,
+//   button.mat-raised-button.mat-primary:hover {
+//     background-color: var(
+//       --mat-sys-color-primary-container-hover,
+//       var(--mat-sys-color-primary-container)
+//     ) !important;
+//   }
+
+//   /* -- DARK MODE OVERRIDES --
+//      These selectors cover three cases:
+//        1) body.dark-mode .upload-root      (ThemeService toggles body)
+//        2) .app-root.dark-mode .upload-root (app-level class toggle)
+//        3) .upload-root.dark-mode            (local toggle)
+//   */
+//   body.dark-mode &,
+//   .app-root.dark-mode &,
+//   &.dark-mode {
+//     .upload-container {
+//       /* keep spacing but rely on app background to provide page-level gradient */
+//       max-width: 900px;
+//       margin: 2rem auto;
+//       display: flex;
+//       flex-direction: column;
+//       gap: 2rem;
+//       padding: 0 1rem;
+//       transition: background 300ms ease, color 300ms ease;
+//     }
+
+//     .upload-card {
+//       padding: 1.75rem;
+//       border-radius: 12px;
+//       /* dark-mode toolbar-like gradient for cards */
+//       background: linear-gradient(135deg, #262626 0%, #1b1b1b 100%);
+//       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+//       color: #e6edf3;
+//       //margin-bottom: 1.5rem;
+//     }
+
+//     .page-title {
+//       color: #cfe8ff; /* lighter blue-ish on dark surface */
+//     }
+
+//     .page-icon {
+//       color: #cfe8ff;
+//     }
+
+//     .result-card {
+//       background: linear-gradient(180deg, #1b1b1b 0%, #111111 100%);
+//       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+//       color: #e6edf3;
+//       //margin-top: 0.5rem;
+//     }
+
+//     .text-section {
+//       background: rgba(255, 255, 255, 0.02);
+//       color: #e6edf3;
+//     }
+
+//     /* Ensure raised primary buttons have good contrast on dark */
+//     button.mat-raised-button[color='primary'],
+//     button.mat-raised-button.mat-primary {
+//       /* you can keep tokens — ensure token values are suitable in your dark theme */
+//       background-color: var(--mat-sys-color-primary-container) !important;
+//       color: var(--mat-sys-color-on-primary-container) !important;
+//       box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
+//     }
+
+//     /* Stroked accent button contrast */
+//     button.mat-stroked-button[color='accent'] {
+//       border-color: rgba(255, 255, 255, 0.08);
+//       color: var(--mat-sys-color-on-surface);
+//     }
+//   } /* end dark-mode overrides */
+
+//   /* Responsive tweaks */
+//   @media (max-width: 600px) {
+//     .upload-card {
+//       padding: 1.25rem;
+//     }
+//     .page-title {
+//       font-size: 1.05rem;
+//     }
+//     .result-card {
+//       padding: 1rem;
+//     }
+//   }
+//   .upload-container > mat-card.upload-card {
+//     margin-bottom: 1.5rem !important;
+//   }
+//   .upload-container > mat-card.result-card {
+//     margin-top: 0.5rem !important;
+//   }
+// }
+
+/* =======================
+   PAGE LAYOUT & HEADER
+   ======================= */
+.upload-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1.5rem;
+  gap: 1.5rem;
+  min-height: 100vh;
+  background-color: var(--mat-sys-surface, #f5f7fb);
+  transition: background 0.3 ease;
+
+  .dark-mode & {
+    background-color: var(--mat-sys-surface-container-low, #1c1c1c);
+  }
+}
+
+.page-title {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: 'Poppins', 'Segoe UI', Roboto, sans-serif;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--mat-sys-color-on-surface, #2c3e50);
+
+  .dark-mode & {
+    color: var(--mat-sys-color-on-surface-variant, #e0e0e0);
+  }
+
+  mat-icon {
+    // font-size: 1.6rem;
+    // color: var(--mat-sys-color-primary, #2962ff);
+    font-size: 1.6rem !important;
+    line-height: 1 !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--mat-sys-color-primary, #2962ff);
+    vertical-align: middle;
+    position: relative;
+    top: 2px; /* prevents clipping */
+  }
+}
+
+/* =======================
+   UPLOAD CARD
+   ======================= */
+
+.upload-card {
+  width: 100%;
+  max-width: 780px; /* increased from 720px */
+  background: linear-gradient(180deg, #ffffff 0%, #f8f9ff 100%);
+  border-radius: 18px;
+  padding: 2.2rem 2rem; /* more breathing space */
+  box-shadow: 0 8px 22px rgba(14, 30, 60, 0.07);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 1.25rem;
+  transition: background 300ms ease, box-shadow 300ms ease;
+  margin-bottom: 1.5rem;
+
+  .dark-mode & {
+    background: linear-gradient(180deg, #2b2b2b 0%, #1e1e1e 100%);
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
+  }
+}
+// .upload-card {
+//   width: 100%;
+//   max-width: 720px;
+//   background: linear-gradient(180deg, #ffffff 0%, #f8f9ff 100%);
+//   border-radius: 160px;
+//   padding: 2rem 1.75rem;
+//   box-shadow: 0 6px 20px rgba(14, 30, 60, 0.06);
+//   display: flex;
+//   flex-direction: column;
+//   align-items: stretch;
+//   gap: 1.25rem;
+//   transition: background 300ms ease, box-shadow 300ms ease;
+
+//   .dark-mode & {
+//     background: linear-gradient(180deg, #2b2b2b 0%, #1e1e1e 100%);
+//     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+//   }
+
+//   margin-bottom: 1.75rem;
+// }
+
+.url-input {
+  width: 100%;
+
+  input {
+    font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+    font-size: 1rem;
+    border-radius: 8px !important;
+    padding: 0.8rem 1rem;
+    letter-spacing: 0.3px;
+    transition: border-color 0.2s ease;
+
+    &:focus {
+      border-color: var(--mat-sys-color-primary, #2962ff);
+      box-shadow: 0 0 0 2px rgba(41, 98, 255, 0.15);
+    }
+  }
+}
+
+/* =======================
+   SCRAPE BUTTON
+   ======================= */
+.scrape-button {
+  align-self: flex-end;
+  font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  padding: 0.55rem 1.3rem;
+  text-transform: none;
+  border-radius: 8px;
+  color: var(--mat-sys-color-on-primary, #fff);
+  background-color: var(--mat-sys-color-primary, #2962ff);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    background-color: var(--mat-sys-color-primary-container, #3f51b5);
+    box-shadow: 0 4px 12px rgba(63, 81, 181, 0.3);
+  }
+
+  &:disabled {
+    background-color: #9fa8da;
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
+  .dark-mode & {
+    background-color: #536dfe;
+  }
+}
+
+/* =======================
+   SPINNER / LOADING STATE
+   ======================= */
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.2rem 0;
+  gap: 0.6rem;
+  font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+  color: var(--mat-sys-color-on-surface-variant, #555);
+
+  mat-spinner {
+    width: 26px !important;
+    height: 26px !important;
+  }
+
+  span {
+    font-size: 0.95rem;
+    font-weight: 500;
+  }
+
+  .dark-mode & {
+    color: #ccc;
+  }
+}
+
+/* =======================
+   RESULT CARD – Smart Scraper
+   ======================= */
+.result-card {
+  width: 100%;
+  max-width: 780px; /* increased from 720px */
+  padding: 1.75rem;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(14, 30, 60, 0.05);
+  background: linear-gradient(180deg, #ffffff 0%, #f6f8ff 100%);
+  transition: background 300ms ease, box-shadow 300ms ease, color 300ms ease;
+
+  /* Dark mode adaptive background */
+  .dark-mode & {
+    background: linear-gradient(180deg, #2b2b2b 0%, #1e1e1e 100%);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  }
+}
+
+/* =======================
+   HEADER: Title + Button Row
+   ======================= */
+.result-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.result-header h3 {
+  margin: 0;
+  font-family: 'Poppins', 'Segoe UI', Roboto, sans-serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  color: var(--mat-sys-color-on-surface, #2c3e50);
+
+  .dark-mode & {
+    color: var(--mat-sys-color-on-surface-variant, #e0e0e0);
+  }
+}
+
+.result-header button {
+  white-space: nowrap;
+  font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-transform: none; /* keep button label case readable */
+  border-radius: 8px;
+  padding: 0.4rem 1rem;
+  letter-spacing: 0.2px;
+}
+
+/* =======================
+   CONTENT / JSON Sections
+   ======================= */
+.mat-expansion-panel-header {
+  font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.text-section {
+  font-family: 'Roboto Mono', 'Consolas', monospace;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--mat-sys-color-on-surface, #333);
+  background: var(--mat-sys-surface-container, #fafafa);
+  border-radius: 8px;
+  padding: 1rem;
+  overflow-x: auto;
+
+  .dark-mode & {
+    background: #121212;
+    color: #f1f1f1;
+  }
+}

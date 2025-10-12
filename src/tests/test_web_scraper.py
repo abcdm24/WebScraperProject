@@ -10,7 +10,9 @@ def test_webscraper_static(monkeypatch, fake_html_response, tmp_path):
     to Static Scraper and save json"""
 
     # Patch requests.get for StaticScraper
-    monkeypatch.setattr(requests, "get", lambda url, timeout=10: fake_html_response)
+    # monkeypatch.setattr(requests, "get", lambda url, timeout=10: fake_html_response)
+
+    monkeypatch.setattr(requests, "get", lambda url, **kwargs: fake_html_response)
 
     output_file = tmp_path / "static.json"
     scraper = WebScraper("static", "https://example.com", str(output_file))
