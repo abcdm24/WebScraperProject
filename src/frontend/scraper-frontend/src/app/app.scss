@@ -255,4 +255,27 @@
       }
     }
   }
+
+  .sidenav-container {
+    height: 120vh;
+  }
+
+  .sidenav {
+    width: 220px;
+  }
+
+  .main-content {
+    padding: 16px;
+  }
+
+  .active {
+    font-weight: bold;
+    color: var(--mat-primary);
+  }
+
+  a.mat-list-item.active {
+    background-color: rgba(63, 81, 181, 0.1);
+    font-weight: 600;
+    border-left: 4px solid #3f51b5;
+  }
 }

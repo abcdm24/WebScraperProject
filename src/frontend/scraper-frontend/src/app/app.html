@@ -361,7 +361,28 @@
 <router-outlet></router-outlet> -->
 <!--//////////////ineline with theme mode - End///////////////////-->
 <!-- app.html -->
-<div class="app-root" [class.dark-mode]="isDark">
+<!-- <mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" mode="side" opened>
+    <mat-toolbar>Smart Scraper</mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item routerlink="/" routerLinkActive="active">Dashboard</a>
+      <a mat-list-item routerlink="/upload" routerLinkActive="active">Scraper</a>
+      <a mat-list-item routerlink="/history" routerLinkActive="active">History</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button mat-icon-button (click)="drawer.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>Smart Scraper</span>
+    </mat-toolbar>
+    <div class="main-content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container> -->
+<!-- <div class="app-root" [class.dark-mode]="isDark">
   <mat-toolbar class="app-toolbar" role="banner">
     <div class="toolbar-left">
       <mat-icon>language</mat-icon>
@@ -383,4 +404,49 @@
   <main class="app-main">
     <router-outlet></router-outlet>
   </main>
+</div> -->
+
+<div class="app-root" [class.dark-mode]="isDark">
+  <mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #drawer class="sidenav" mode="side" opened>
+      <mat-toolbar>Smart Scraper</mat-toolbar>
+      <mat-nav-list>
+        <a mat-list-item routerLink="/" routerLinkActive="active">Dashboard</a>
+        <a mat-list-item routerLink="/upload" routerLinkActive="active">Scraper</a>
+        <a mat-list-item routerLink="/history" routerLinkActive="active">History</a>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <mat-toolbar class="app-toolbar" role="banner">
+        <button
+          mat-icon-button
+          (click)="drawer.toggle()"
+          class="menu-button"
+          aria-label="Toggle sidenav"
+        >
+          <mat-icon>menu</mat-icon>
+        </button>
+
+        <div class="toolbar-left">
+          <mat-icon>language</mat-icon>
+          <span class="app-title">Smart Scraper</span>
+        </div>
+
+        <span class="spacer"></span>
+
+        <button
+          mat-icon-button
+          (click)="toggleTheme()"
+          [matTooltip]="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
+          aria-label="Toggle theme"
+        >
+          <mat-icon aria-hidden="false">{{ isDark ? 'light_mode' : 'dark_mode' }}</mat-icon>
+        </button>
+      </mat-toolbar>
+
+      <main class="app-main">
+        <router-outlet></router-outlet>
+      </main>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
 </div>

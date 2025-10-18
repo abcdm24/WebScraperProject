@@ -1,0 +1,23 @@
+.history-container {
+  padding: 50px;
+  background-color: var(--mat-surface);
+  border-radius: 12px;
+
+  h2 {
+    margin-bottom: 16px;
+  }
+
+  table {
+    width: 100%;
+  }
+
+  .success {
+    color: green;
+    font-weight: 500;
+  }
+
+  .error {
+    color: red;
+    font-weight: 500;
+  }
+}

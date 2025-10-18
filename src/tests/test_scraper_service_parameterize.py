@@ -3,7 +3,7 @@ import json
 import pytest
 from fastapi.testclient import TestClient
 from src.backend.main import app
-from src.tests.conftest import API_PREFIX
+from src.utils.config import API_PREFIX
 
 client = TestClient(app)
 
@@ -35,7 +35,7 @@ def test_scraper_success(monkeypatch, endpoint, service_name, test_data, request
 
     monkeypatch.setattr(f"src.backend.routes.scraper_routes.{service_name}", mock_service)
 
-    response = client.post(f"{API_PREFIX}/{endpoint}", json={"url": request_url})
+    response = client.post(f"{API_PREFIX}/scraper/{endpoint}", json={"url": request_url})
     data = response.json()
 
     assert response.status_code == 200
@@ -62,7 +62,7 @@ def test_scraper_error(monkeypatch, endpoint, service_name, exception, message, 
 
     monkeypatch.setattr(f"src.backend.routes.scraper_routes.{service_name}", mock_service)
 
-    response = client.post(f"{API_PREFIX}/{endpoint}", json={"url": request_url})
+    response = client.post(f"{API_PREFIX}/scraper/{endpoint}", json={"url": request_url})
     data = response.json()
 
     assert response.status_code == 200

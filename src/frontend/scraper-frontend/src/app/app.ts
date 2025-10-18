@@ -1,21 +1,26 @@
 import { Component, signal, Renderer2, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet, RouterLink, RouterLinkActive, Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ThemeService } from './core/services/theme.service';
 import { MatSlideToggle, MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MaterialModule } from './shared/material/material.module';
 
 @Component({
   selector: 'app-root',
+  standalone: true,
   imports: [
     RouterOutlet,
+    RouterLink,
+    RouterLinkActive,
     MatIconModule,
     MatButtonModule,
     MatToolbarModule,
     MatTooltipModule,
     MatSlideToggleModule,
+    MaterialModule,
   ],
   templateUrl: './app.html',
   styleUrl: './app.scss',

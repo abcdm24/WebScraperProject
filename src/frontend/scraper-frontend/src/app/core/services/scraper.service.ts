@@ -19,7 +19,7 @@ export interface ScrapeResponse {
 
 @Injectable({ providedIn: 'root' })
 export class ScraperService {
-  private readonly apiUrl = 'http://localhost:8000/scraper';
+  private readonly apiUrl = 'http://localhost:8000/api/scraper';
 
   constructor(private http: HttpClient) {}
 

@@ -1,6 +1,11 @@
 import pytest
+from fastapi.testclient import TestClient
+from src.backend.main import app
 
-API_PREFIX = "/scraper"
+
+@pytest.fixture
+def client():
+    return TestClient(app)
 
 
 @pytest.fixture

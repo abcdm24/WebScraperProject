@@ -2,7 +2,7 @@ import tempfile
 import json
 from fastapi.testclient import TestClient
 from src.backend.main import app
-from src.tests.conftest import API_PREFIX
+from src.utils.config import API_PREFIX
 
 client = TestClient(app)
 
@@ -26,7 +26,7 @@ def test_scrape_static_success(monkeypatch):
 
     monkeypatch.setattr("src.backend.routes.scraper_routes.scrape_static_service", mock_services)
 
-    response = client.post(f"{API_PREFIX}/static", json={"url": "https://example.com"})
+    response = client.post(f"{API_PREFIX}/scraper/static", json={"url": "https://example.com"})
     data = response.json()
     print('Scraper data: ', data)
     assert response.status_code == 200
@@ -47,7 +47,7 @@ def test_scrape_dynamic_success(monkeypatch):
 
     monkeypatch.setattr("src.backend.routes.scraper_routes.scrape_dynamic_service", mock_services)
 
-    response = client.post(f"{API_PREFIX}/dynamic", json={"url": "https://example.com"})
+    response = client.post(f"{API_PREFIX}/scraper/dynamic", json={"url": "https://example.com"})
     data = response.json()
     print('Scraper data: ', data)
     assert response.status_code == 200
@@ -66,7 +66,7 @@ def test_scrape_api_success(monkeypatch):
 
     monkeypatch.setattr("src.backend.routes.scraper_routes.scrape_api_service", mock_services)
 
-    response = client.post(f"{API_PREFIX}/api", json={"url": "https://jsonplaceholder.typicode.com/todos/1"})
+    response = client.post(f"{API_PREFIX}/scraper/api", json={"url": "https://jsonplaceholder.typicode.com/todos/1"})
     data = response.json()
     print('Scraper data: ', data)
     assert response.status_code == 200
@@ -84,7 +84,7 @@ def test_scrape_static_error(monkeypatch):
 
     monkeypatch.setattr("src.backend.routes.scraper_routes.scrape_static_service", mock_service)
 
-    response = client.post(f"{API_PREFIX}/static", json={"url": "https://bad-url.com"})
+    response = client.post(f"{API_PREFIX}/scraper/static", json={"url": "https://bad-url.com"})
     data = response.json()
 
     assert response.status_code == 200
@@ -99,7 +99,7 @@ def test_scrape_dynamic_error(monkeypatch):
 
     monkeypatch.setattr("src.backend.routes.scraper_routes.scrape_dynamic_service", mock_service)
 
-    response = client.post(f"{API_PREFIX}/dynamic", json={"url": "https://bad-url.com"})
+    response = client.post(f"{API_PREFIX}/scraper/dynamic", json={"url": "https://bad-url.com"})
     data = response.json()
 
     assert response.status_code == 200
@@ -114,7 +114,7 @@ def test_scrape_api_error(monkeypatch):
 
     monkeypatch.setattr("src.backend.routes.scraper_routes.scrape_api_service", mock_service)
 
-    response = client.post(f"{API_PREFIX}/api", json={"url": "https://bad-api.com"})
+    response = client.post(f"{API_PREFIX}/scraper/api", json={"url": "https://bad-api.com"})
     data = response.json()
 
     assert response.status_code == 200

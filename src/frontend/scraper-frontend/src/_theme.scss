@@ -1,0 +1,82 @@
+@use '@angular/material' as mat;
+
+// initialize core styles / mixins
+@include mat.core();
+
+// -----------------------------
+// Light theme (primary definitions)
+// -----------------------------
+$light-theme: mat.define-light-theme(
+  (
+    color: (
+      // required: tell the API whether this theme is light/dark
+      theme-type: light,
+
+      // M3 palettes (primary / tertiary / error)
+      primary: mat.$violet-palette,
+      tertiary: mat.$magenta-palette,
+      error: mat.$red-palette,
+
+      // optional: emit the M3 CSS custom properties (useful / recommended)
+      use-system-variables: true,
+    ),
+
+    // Typography: use the built-in helper (remove if your lib/version doesn't define it).
+    // If you get an "Undefined function" error here, remove this line (see notes below).
+    //typography: mat.define-typography-config(),
+    // Density: scale controls spacing; we use 0 (default). You can set (scale: -2) etc.
+    density:
+      (
+        scale: 0,
+      ),
+  )
+);
+
+// -----------------------------
+// Dark theme (same palettes, dark mode flag)
+// -----------------------------
+$dark-theme: mat.define-dark-theme(
+  (
+    color: (
+      theme-type: dark,
+      primary: mat.$violet-palette,
+      tertiary: mat.$pink-palette,
+      error: mat.$red-palette,
+      use-system-variables: true,
+    ),
+    typography: mat.define-typography-config(),
+    density: (
+      scale: 0,
+    ),
+  )
+);
+
+// -----------------------------
+// Apply themes
+// -----------------------------
+// Default (light) variables for the app
+:root {
+  @include mat.all-component-themes($light-theme);
+  // Optional: keep some M2 compatibility helpers if you need them
+  @include mat.color-variants-backwards-compatibility($light-theme);
+}
+
+// When the user OS prefers dark, override with the dark theme
+@media (prefers-color-scheme: dark) {
+  :root {
+    @include mat.all-component-themes($dark-theme);
+    @include mat.color-variants-backwards-compatibility($dark-theme);
+  }
+}
+
+html {
+  color-scheme: light dark;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  /* Material 3 system tokens (CSS vars) exposed by the theme */
+  //background-color: var(--mat-sys-background);
+  color: var(--mat-sys-on-background);
+}
