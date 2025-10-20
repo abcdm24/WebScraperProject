@@ -31,7 +31,7 @@ jobs:
         run: |
           az acr build --registry ${{env.ACR_NAME}} \
           --image ${{env.IMAGE_NAME}}:${{github.sha}} \
-          ./backend
+          ./src/backend
 
       - name: Update Container App to new image
         run: |
