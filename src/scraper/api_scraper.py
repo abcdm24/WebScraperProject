@@ -17,6 +17,7 @@
 #         except ValueError:
 #             return {"url": self.url, "data": response.text}
 
+import json
 import requests
 from src.utils import storage
 from src.scraper.base_scraper import BaseScraper
@@ -31,6 +32,14 @@ class ApiScraper(BaseScraper):
         response.raise_for_status()
         data = response.json()
 
-        storage.save_json([{"url": self.url, "api_response": data}], self.output)
+        normalized_output = {
+            "metadata": {"ur": self.url, "status_code": response.status_code},
+            "headings": [],
+            "links": [],
+            "images": [],
+            "text": json.dumps(data, indent=2)
+        }
+        storage.save_json(normalized_output, self.output)
+        # storage.save_json([{"url": self.url, "api_response": data}], self.output)
         print(f"Saved API scrape results to {self.output}")
         return self.output

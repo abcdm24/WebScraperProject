@@ -141,6 +141,8 @@
 //   }
 // }
 
+////---------------Current theme---------------//////
+
 .app-root {
   min-height: 100vh;
   display: flex;
@@ -219,6 +221,9 @@
     display: flex;
     flex-direction: column;
     align-items: stretch;
+    //height: calc(100vh - 64px);
+    //overflow-y: auto;
+    //height: 100%;
     //gap: 1.5rem;
   }
 
@@ -257,7 +262,10 @@
   }
 
   .sidenav-container {
-    height: 120vh;
+    //height: 120vh;
+    //height: 100%;
+    min-height: 120vh;
+    height: auto;
   }
 
   .sidenav {
@@ -279,3 +287,109 @@
     border-left: 4px solid #3f51b5;
   }
 }
+
+//----------Experimental theme-----------//
+// /* ================================
+//    APP LAYOUT – SMART SCRAPER
+//    ================================ */
+
+// /* Root sidenav container */
+// mat-sidenav-container {
+//   display: flex;
+//   flex-direction: column;
+//   min-height: 100vh; /* fills full viewport height */
+//   height: auto; /* let content define extra height */
+//   background: var(--mat-sys-surface, #fafafa);
+//   color: var(--mat-sys-color-on-surface, #212121);
+
+//   .dark-mode & {
+//     background: #121212;
+//     color: #e0e0e0;
+//   }
+// }
+
+// /* ================================
+//    SIDENAV
+//    ================================ */
+// mat-sidenav {
+//   width: 240px;
+//   background: var(--mat-sys-surface-container, #ffffff);
+//   border-right: 1px solid rgba(0, 0, 0, 0.08);
+//   padding: 1rem 0;
+
+//   .dark-mode & {
+//     background: #1e1e1e;
+//     border-right-color: rgba(255, 255, 255, 0.08);
+//   }
+// }
+
+// /* ================================
+//    TOOLBAR
+//    ================================ */
+// .app-toolbar {
+//   position: sticky;
+//   top: 0;
+//   z-index: 1100;
+//   display: flex;
+//   align-items: center;
+//   gap: 0.5rem;
+//   padding: 0 1rem;
+//   height: 64px;
+//   background: var(--mat-sys-color-primary, #2962ff);
+//   color: var(--mat-sys-color-on-primary, #fff);
+//   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+
+//   .app-title {
+//     font-family: 'Poppins', 'Segoe UI', Roboto, sans-serif;
+//     font-weight: 600;
+//     font-size: 1.1rem;
+//     letter-spacing: 0.3px;
+//   }
+
+//   .menu-button {
+//     margin-right: 0.5rem;
+//   }
+
+//   .dark-mode & {
+//     background: #1f1f1f;
+//     color: #f5f5f5;
+//     box-shadow: 0 2px 6px rgba(255, 255, 255, 0.1);
+//   }
+// }
+
+// /* ================================
+//    MAIN CONTENT AREA
+//    ================================ */
+// .app-main {
+//   flex: 1 1 auto;
+//   padding: 1rem 1.25rem 2rem;
+//   display: flex;
+//   flex-direction: column;
+//   align-items: stretch;
+//   overflow: visible; /* only browser scrolls */
+
+//   /* optional subtle fade for top of content */
+//   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.02), transparent 40%);
+
+//   .dark-mode & {
+//     background: linear-gradient(to bottom, rgba(255, 255, 255, 0.05), transparent 40%);
+//   }
+// }
+
+// /* ================================
+//    RESPONSIVE TWEAKS
+//    ================================ */
+// @media (max-width: 768px) {
+//   mat-sidenav {
+//     width: 200px;
+//   }
+
+//   .app-toolbar {
+//     height: 56px;
+//     padding: 0 0.75rem;
+//   }
+
+//   .app-main {
+//     padding: 0.75rem;
+//   }
+// }

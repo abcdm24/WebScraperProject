@@ -13,10 +13,11 @@ export class Upload {
   url = '';
   scrapedData: any = null;
   loading = false;
+  scrapeType: string = 'static';
 
   constructor(private scraper: ScraperService, private snackBar: MatSnackBar) {}
 
-  onScrapeStatic(): void {
+  onScrape(): void {
     // this.scraper.scrapeStatic(this.url).subscribe((res) => {
     //   this.output = res;
     // });
@@ -26,9 +27,10 @@ export class Upload {
     }
 
     this.loading = true;
-    this.scraper.scrapeStatic(this.url).subscribe({
+    this.scraper.scrapeWebsite(this.url, this.scrapeType).subscribe({
       next: (res) => {
         if (res.status === 'success' && res.data) {
+          console.log('Scraping successful:', res.data);
           this.scrapedData = res.data;
         } else {
           console.error('Scraping failed:', res.error);

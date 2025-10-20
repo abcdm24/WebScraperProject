@@ -10,11 +10,20 @@
       <input matInput [(ngModel)]="url" placeholder="https://example.com" />
     </mat-form-field>
 
+    <mat-form-field appearance="outline" class="scrape-type-select">
+      <mat-label>Scraper Type</mat-label>
+      <mat-select [(value)]="scrapeType">
+        <mat-option value="static">Static</mat-option>
+        <mat-option value="dynamic">Dynamic</mat-option>
+        <mat-option value="api">API</mat-option>
+      </mat-select>
+    </mat-form-field>
+
     <button
       mat-raised-button
       color="primary"
       class="scrape-button"
-      (click)="onScrapeStatic()"
+      (click)="onScrape()"
       [disabled]="loading"
     >
       <mat-icon *ngIf="!loading">cloud_upload</mat-icon>

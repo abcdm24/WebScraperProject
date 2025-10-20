@@ -334,6 +334,74 @@
 }
 
 /* =======================
+   SCRAPE TYPE SELECT
+   ======================= */
+
+.scrape-type-select {
+  width: 100%;
+
+  font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+  font-size: 1rem;
+  letter-spacing: 0.3px;
+
+  .mat-form-field-flex {
+    border-radius: 8px !important;
+    background-color: #fff;
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+
+  .mat-form-field-appearence-outline .mat-form-field-outline {
+    color: rgba(0, 0, 0, 0.23);
+  }
+
+  .mat-select-trigger {
+    padding: 0.8rem 1rem;
+    color: var(--mat-sys-color-on-surface, #333);
+  }
+
+  .mat-select-arrow {
+    color: #555;
+  }
+
+  &:focus-within .mat-form-field-flex {
+    box-shadow: 0 0 0 2px rgba(41, 98, 255, 0.15);
+  }
+
+  .dark-mode & {
+    .mat-form-field-flex {
+      background-color: #1f1f1f;
+      color: #e0e0e0;
+    }
+
+    .mat-select-trigger {
+      color: #e0e0e0;
+    }
+
+    .mat-select-arrow {
+      color: #bbb;
+    }
+
+    ::ng-deep .mat-select-panel {
+      background-color: #2b2b2b !important;
+      color: #e0e0e0 !important;
+    }
+
+    ::ng-deep .mat-option {
+      background: transparent !important;
+      color: #e0e0e0 !important;
+    }
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.08) !important;
+    }
+
+    &.mat-selected {
+      background-color: rgba(83, 109, 254, 0.3) !important;
+    }
+  }
+}
+
+/* =======================
    SCRAPE BUTTON
    ======================= */
 .scrape-button {

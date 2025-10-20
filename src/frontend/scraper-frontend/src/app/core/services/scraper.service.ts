@@ -23,6 +23,22 @@ export class ScraperService {
 
   constructor(private http: HttpClient) {}
 
+  scrapeWebsite(url: string, type: string): Observable<ScrapeResponse> {
+    switch (type) {
+      case 'static':
+        console.log('Using static scraper');
+        return this.scrapeStatic(url);
+      case 'dynamic':
+        console.log('Using dynamic scraper');
+        return this.scrapeDynamic(url);
+      case 'api':
+        console.log('Using API scraper');
+        return this.scrapeApi(url);
+      default:
+        throw new Error(`Unknown scrape type: ${type}`);
+    }
+  }
+
   scrapeStatic(url: string): Observable<ScrapeResponse> {
     return this.http.post<ScrapeResponse>(`${this.apiUrl}/static`, { url });
   }
@@ -32,6 +48,8 @@ export class ScraperService {
   }
 
   scrapeApi(url: string): Observable<ScrapeResponse> {
-    return this.http.post<ScrapeResponse>(`${this.apiUrl}/api`, { url });
+    var output = this.http.post<ScrapeResponse>(`${this.apiUrl}/api`, { url });
+    console.log('API Scraper called: ', output);
+    return output;
   }
 }
