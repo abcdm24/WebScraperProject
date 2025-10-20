@@ -1,0 +1,22 @@
+# Use official Python Base
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# system deps (if needed)
+RUN apt-get update && apt-get install -y --no-install-recommends build-essential \
+    && rm -rf /var/lib/apt/lists/*
+
+# copy requirements
+COPY ./src/backend/requirements.txt /app/requirements.txt
+RUN pip install --no-cache-dir -r /app
+
+# copy app code
+COPY ./src/backend /app/
+
+# expose port (App Service uses PORT env var but we expose 8000)
+EXPOSE 8000
+
+# Use Gunicorn with Uvicorn workers
+CMD ["gunicorn", "src.backend.main:app", "--workers", "2", "--worker-class", "uvicorn.workers.UvicornWorker", "--bind", "0.0.0.0:8000" "--log-level", "info"]
+
