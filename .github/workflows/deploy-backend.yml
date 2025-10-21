@@ -34,6 +34,14 @@ jobs:
           -f src/backend/Dockerfile \
           ./src
 
+      - name: Grant ACR access to Container App (optional)
+        run: |
+          az containerapp registry set \
+          --name ${{env.AZURE_CONTAINER_NAME}} \
+          --resource-group ${{env.AZURE_RESOURCE_GROUP}} \
+          --server ${{env.ACR_NAME}}.azurecr.io \
+          --identity system
+
       - name: Update Container App to new image
         run: |
           az containerapp update \
