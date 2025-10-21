@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends build-essential
 
 # Debugging
 RUN echo "Listing context contents:" && ls -R .
-RUN echo "Checcking for requirements.txt:" && ls -l ./backend/
+# RUN echo "Checcking for requirements.txt:" && ls -l ./backend/
 
 
 # copy requirements
@@ -25,10 +25,14 @@ COPY backend /app/backend
 COPY scraper /app/scraper
 COPY utils /app/utils
 
+# Debugging
+RUN echo "Listing context contents:" && ls -R .
+RUN echo "Checcking for requirements.txt:" && ls -l /app/
+RUN echo "=== Confirm backend structure ===" && ls -R /app/backend
 
 # expose port (App Service uses PORT env var but we expose 8000)
 EXPOSE 8000
 
 # Use Gunicorn with Uvicorn workers
-CMD ["gunicorn", "src.backend.main:app", "--workers", "2", "--worker-class", "uvicorn.workers.UvicornWorker", "--bind", "0.0.0.0:8000", "--log-level", "info"]
+CMD ["gunicorn", "backend.main:app", "--workers", "2", "--worker-class", "uvicorn.workers.UvicornWorker", "--bind", "0.0.0.0:8000", "--log-level", "info"]
 
