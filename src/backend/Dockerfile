@@ -22,8 +22,8 @@ RUN pip install --no-cache-dir -r /app/requirements.txt
 
 # copy app code
 COPY backend /app/backend
-COPY scraper /app/scraper
-COPY utils /app/utils
+# COPY scraper /app/scraper
+# COPY utils /app/utils
 
 # Make sure backend is a Python package
 RUN touch /app/backend/__init__.py
