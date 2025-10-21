@@ -16,7 +16,9 @@ export interface ScrapeHistory {
   providedIn: 'root',
 })
 export class HistoryService {
-  private readonly API_URL = 'http://localhost:8000/api/history';
+  // private readonly API_URL = 'http://localhost:8000/api/history';
+  private readonly API_URL =
+    'https://smart-scraper-backend.purplestone-f82c5670.eastus.azurecontainerapps.io/api/history';
 
   constructor(private http: HttpClient) {}
 

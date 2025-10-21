@@ -35,6 +35,7 @@
           },
           "configurations": {
             "production": {
+              "outputPath": "dist/scraper-frontend",
               "budgets": [
                 {
                   "type": "initial",
@@ -50,6 +51,7 @@
               "outputHashing": "all"
             },
             "development": {
+              "outputPath": "dist/scraper-frontend",
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true

@@ -19,7 +19,9 @@ export interface ScrapeResponse {
 
 @Injectable({ providedIn: 'root' })
 export class ScraperService {
-  private readonly apiUrl = 'http://localhost:8000/api/scraper';
+  //private readonly apiUrl = 'http://localhost:8000/api/scraper';
+  private readonly apiUrl =
+    'https://smart-scraper-backend.purplestone-f82c5670.eastus.azurecontainerapps.io/api/scraper';
 
   constructor(private http: HttpClient) {}
 
