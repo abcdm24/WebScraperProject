@@ -1,9 +1,10 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from src.backend.routes.scraper_routes import router as scraper_router
+from .routes.scraper_routes import router as scraper_router
 # from src.tests.conftest import API_PREFIX
-from src.utils.config import API_PREFIX
-from src.backend.routes.history_routes import router as history_router
+from .utils.config import API_PREFIX
+from .routes.history_routes import router as history_router
+
 app = FastAPI(title="Webscraper API")
 
 app.add_middleware(

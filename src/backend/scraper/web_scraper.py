@@ -40,9 +40,9 @@
 #         response.raise_for_status()
 #         return response.text
 
-from src.scraper.static_scraper import StaticScraper
-from src.scraper.dynamic_scraper import DynamicScraper
-from src.scraper.api_scraper import ApiScraper
+from .static_scraper import StaticScraper
+from .dynamic_scraper import DynamicScraper
+from .api_scraper import ApiScraper
 
 
 class WebScraper:

@@ -19,8 +19,8 @@
 
 import json
 import requests
-from src.utils import storage
-from src.scraper.base_scraper import BaseScraper
+from ..utils import storage
+from .base_scraper import BaseScraper
 
 
 class ApiScraper(BaseScraper):
@@ -33,7 +33,7 @@ class ApiScraper(BaseScraper):
         data = response.json()
 
         normalized_output = {
-            "metadata": {"ur": self.url, "status_code": response.status_code},
+            "metadata": {"url": self.url, "status_code": response.status_code},
             "headings": [],
             "links": [],
             "images": [],

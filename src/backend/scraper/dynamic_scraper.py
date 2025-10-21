@@ -14,8 +14,9 @@
 
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-from src.utils import parser, storage
-from src.scraper.base_scraper import BaseScraper
+from ..utils import parser
+from ..utils import storage
+from .base_scraper import BaseScraper
 
 
 class DynamicScraper(BaseScraper):
@@ -41,4 +42,3 @@ class DynamicScraper(BaseScraper):
         storage.save_json([data], self.output)
         print(f"Saved dynamic scrape results tp {self.output}")
         return self.output
-

@@ -1,7 +1,7 @@
 import json
 import shutil
 from datetime import datetime, timedelta, UTC
-from src.utils.config import DATA_DIR_HISTORY
+from ..utils.config import DATA_DIR_HISTORY
 
 
 def test_get_history_empty(client):

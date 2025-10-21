@@ -1,9 +1,7 @@
-from fastapi import APIRouter, HTTPException
-from pathlib import Path
+from fastapi import APIRouter
 import json
 from datetime import datetime
-from src.utils.config import DATA_DIR_HISTORY
-from pathlib import Path
+from ..utils.config import DATA_DIR_HISTORY
 
 router = APIRouter()
 

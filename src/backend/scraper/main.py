@@ -3,8 +3,8 @@
 import argparse
 
 from .web_scraper import WebScraper
-from src.utils.parser import extract_links
-from src.utils.storage import save_json
+from utils.parser import extract_links
+from utils.storage import save_json
 
 # from bs4 import BeautifulSoup
 # from pathlib import Path

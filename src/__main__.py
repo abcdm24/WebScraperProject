@@ -45,7 +45,7 @@
 # if __name__ == "__main__":
 #     run()
 
-from src.scraper.main import main
+from backend.scraper.main import main
 
 if __name__ == "__main__":
     main()

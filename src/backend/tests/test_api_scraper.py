@@ -23,7 +23,7 @@
 
 import json
 import os
-from src.scraper.api_scraper import ApiScraper
+from ..scraper.api_scraper import ApiScraper
 
 
 def test_api_scraper_saves_json(monkeypatch, tmp_path):
@@ -37,15 +37,17 @@ def test_api_scraper_saves_json(monkeypatch, tmp_path):
 
     # Fake API response object
     class FakeResponse:
-
+        def __init__(self):
+            self.status_code = 200
+            
         def raise_for_status(self):
-            return None
+            pass
 
         def json(self):
             return {"status": "ok", "items": [1, 2, 3]}
 
     # Patch requests.get to return fake response
-    monkeypatch.setattr("src.scraper.api_scraper.requests.get", lambda url, timeout=10: FakeResponse())
+    monkeypatch.setattr("backend.scraper.api_scraper.requests.get", lambda url, timeout=10: FakeResponse())
 
     # Temporary output file
     output_file = tmp_path / "api.json"
@@ -59,12 +61,23 @@ def test_api_scraper_saves_json(monkeypatch, tmp_path):
     with open(result_path, "r") as f:
         data = json.load(f)
 
-    assert isinstance(data, list)
-    assert len(data) == 1
-    record = data[0]
+    assert isinstance(data, dict)
+    assert len(data) == 5
+    # record = data[0]
+    #
+    # assert "url" in record
+    # assert "api_response" in record
+    # assert record["url"] == "https://api.example.com/data"
+    # assert record["api_response"]["status"] == "ok"
+    # assert record["api_response"]["items"] == [1, 2, 3]
 
-    assert "url" in record
-    assert "api_response" in record
-    assert record["url"] == "https://api.example.com/data"
-    assert record["api_response"]["status"] == "ok"
-    assert record["api_response"]["items"] == [1, 2, 3]
+    metadata = data.get("metadata")
+    text_json = data.get("text")
+
+    assert metadata is not None
+    assert metadata["url"] == "https://api.example.com/data"
+    assert metadata["status_code"] == 200
+
+    api_response = json.loads(text_json)
+    assert api_response["status"] == "ok"
+    assert api_response["items"] == [1, 2, 3]

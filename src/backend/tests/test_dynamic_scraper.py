@@ -15,7 +15,7 @@
 import json
 import os
 # import types
-from src.scraper.dynamic_scraper import DynamicScraper
+from ..scraper.dynamic_scraper import DynamicScraper
 
 
 def test_dynamic_scraper_saves_json(monkeypatch, fake_html_response, tmp_path):
@@ -43,7 +43,7 @@ def test_dynamic_scraper_saves_json(monkeypatch, fake_html_response, tmp_path):
             return None
 
     # Patch webdriver.Chrome to return fake driver
-    monkeypatch.setattr("src.scraper.dynamic_scraper.webdriver.Chrome", lambda *a, **kw: FakeDriver())
+    monkeypatch.setattr("backend.scraper.dynamic_scraper.webdriver.Chrome", lambda *a, **kw: FakeDriver())
 
     output_file = tmp_path / "dynamic.json"
     scraper = DynamicScraper("https://example.com/dynamic", str(output_file))

@@ -1,5 +1,4 @@
-import pytest
-from src.utils import parser, storage
+from ..utils import parser
 
 html = "<html><head><title>Test</title></head><body><a href='/page'>Link</a></body></html>"
 

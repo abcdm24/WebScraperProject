@@ -1,7 +1,7 @@
 import os
 from datetime import datetime
-from src.scraper.web_scraper import WebScraper
-from src.utils.config import DATA_DIR_PROCESSED
+from ..scraper.web_scraper import WebScraper
+from ..utils.config import DATA_DIR_PROCESSED
 
 
 def _make_output_path(prefix: str = "scrape") -> str:

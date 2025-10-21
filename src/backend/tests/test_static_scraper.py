@@ -1,6 +1,4 @@
 # import pytest
-from src.scraper.static_scraper import StaticScraper
-import src.scraper.web_scraper as scraper_module
 
 
 # def test_static_scraper_returns_dict(monkeypatch, fake_html_response):
@@ -20,8 +18,7 @@ import src.scraper.web_scraper as scraper_module
 #     assert "links" in data
 #     assert len(data["links"]) == 2
 
-from src.scraper.static_scraper import StaticScraper
-import src.scraper.web_scraper as scraper_module
+from ..scraper.static_scraper import StaticScraper
 import json
 import os
 import requests

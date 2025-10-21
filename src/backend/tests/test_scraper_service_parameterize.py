@@ -2,8 +2,8 @@ import tempfile
 import json
 import pytest
 from fastapi.testclient import TestClient
-from src.backend.main import app
-from src.utils.config import API_PREFIX
+from ..main import app
+from ..utils.config import API_PREFIX
 
 client = TestClient(app)
 

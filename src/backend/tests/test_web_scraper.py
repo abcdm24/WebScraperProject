@@ -2,7 +2,7 @@ import json
 import os
 import requests
 import pytest
-from src.scraper.web_scraper import WebScraper
+from ..scraper.web_scraper import WebScraper
 
 
 def test_webscraper_static(monkeypatch, fake_html_response, tmp_path):
@@ -46,7 +46,8 @@ def test_webscraper_dynamic(monkeypatch, fake_html_response, tmp_path):
         def get(self, url): return None
         def quit(self): return None
 
-    import src.scraper.dynamic_scraper as dynamic_module
+    # import scraper.dynamic_scraper as dynamic_module
+    from ..scraper import dynamic_scraper as dynamic_module
     monkeypatch.setattr(dynamic_module.webdriver, "Chrome", lambda *a, **kw: FakeDriver())
     # monkeypatch.setattr("src.scraper.dynamic_scraper.webdriver.Chrome", lambda *a, **kw: FakeDriver())
 
@@ -74,7 +75,12 @@ def test_webscraper_api(monkeypatch, tmp_path):
 
     # Fake API response
     class FakeResponse:
-        def raise_for_status(self): return None
+
+        def __init__(self):
+            self.status_code = 200
+
+        def raise_for_status(self): pass
+
         def json(self): return {"status": "ok", "items": [1, 2, 3]}
 
     monkeypatch.setattr(requests, "get", lambda url, timeout=10: FakeResponse())
@@ -88,10 +94,22 @@ def test_webscraper_api(monkeypatch, tmp_path):
     with open(result_path, "r") as f:
         data = json.load(f)
 
-    assert isinstance(data, list)
-    assert data[0]["url"] == "https://api.example.com/data"
-    assert data[0]["api_response"]["status"] == "ok"
-    assert data[0]["api_response"]["items"] == [1, 2, 3]
+    assert isinstance(data, dict)
+
+    metadata = data.get("metadata")
+    text_json = data.get("text")
+
+    # assert data[0]["url"] == "https://api.example.com/data"
+    # assert data[0]["api_response"]["status"] == "ok"
+    # assert data[0]["api_response"]["items"] == [1, 2, 3]
+
+    assert metadata is not None
+    assert metadata["url"] == "https://api.example.com/data"
+    assert metadata["status_code"] == 200
+
+    api_response = json.loads(text_json)
+    assert api_response["status"] == "ok"
+    assert api_response["items"] == [1, 2, 3]
 
 
 def test_webscraper_invalid_type(tmp_path):

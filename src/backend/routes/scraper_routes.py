@@ -3,7 +3,7 @@ import uuid
 
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, HttpUrl
-from src.backend.services.scraper_services import (
+from ..services.scraper_services import (
     scrape_static_service,
     scrape_dynamic_service,
     scrape_api_service
@@ -12,7 +12,7 @@ from datetime import datetime, UTC
 
 # from src.tests.conftest import API_PREFIX
 
-from src.utils.config import DATA_DIR_HISTORY
+from ..utils.config import DATA_DIR_HISTORY
 
 router = APIRouter()
 
