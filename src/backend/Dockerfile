@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends build-essential
 
 # Debugging
 RUN echo "Listing context contents:" && ls -R .
-RUN echo "Checcking for requirements.txt:" && ls -l /backend/
+RUN echo "Checcking for requirements.txt:" && ls -l ./backend/
 
 
 # copy requirements
