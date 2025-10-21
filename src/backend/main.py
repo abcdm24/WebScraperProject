@@ -17,7 +17,12 @@ app.add_middleware(
 
 @app.get("/")
 def root():
-    return {"message": "WebScraper API is running"}
+    return {"status": "ok", "message": "WebScraper API is running"}
+
+
+@app.get("/health")
+def health_check():
+    return {"health": "healthy"}
 
 
 app.include_router(scraper_router, prefix=f"{API_PREFIX}/scraper")
