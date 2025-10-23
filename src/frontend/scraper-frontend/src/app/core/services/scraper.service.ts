@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 export interface ScrapeResult {
   url: string;
@@ -20,8 +21,8 @@ export interface ScrapeResponse {
 @Injectable({ providedIn: 'root' })
 export class ScraperService {
   //private readonly apiUrl = 'http://localhost:8000/api/scraper';
-  private readonly apiUrl =
-    'https://smart-scraper-backend.purplestone-f82c5670.eastus.azurecontainerapps.io/api/scraper';
+  private readonly apiUrl = environment.apiUrl + 'scraper';
+  // 'https://smart-scraper-backend.purplestone-f82c5670.eastus.azurecontainerapps.io/api/scraper';
 
   constructor(private http: HttpClient) {}
 
@@ -42,16 +43,19 @@ export class ScraperService {
   }
 
   scrapeStatic(url: string): Observable<ScrapeResponse> {
+    console.log(`Static Scraper called: ${this.apiUrl}/static`, { url });
     return this.http.post<ScrapeResponse>(`${this.apiUrl}/static`, { url });
   }
 
   scrapeDynamic(url: string): Observable<ScrapeResponse> {
+    console.log(`Dynamic Scraper called: ${this.apiUrl}/dynamic`, { url });
     return this.http.post<ScrapeResponse>(`${this.apiUrl}/dynamic`, { url });
   }
 
   scrapeApi(url: string): Observable<ScrapeResponse> {
     var output = this.http.post<ScrapeResponse>(`${this.apiUrl}/api`, { url });
     console.log('API Scraper called: ', output);
+    console.log(`API Scraper called: ${this.apiUrl}/api`, { url });
     return output;
   }
 }
