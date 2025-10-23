@@ -9,7 +9,7 @@ app = FastAPI(title="Webscraper API")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],     # allow any origin
+    allow_origins=["https://green-ocean-0c329510f.3.azurestaticapps.net"],     # * to allow any origin
     allow_credentials=True,
     allow_methods=["*"],     # allow all HTTP methods
     allow_headers=["*"],     # allow all headers
