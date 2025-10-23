@@ -35,6 +35,11 @@
           },
           "configurations": {
             "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }],
               "outputPath": "dist/scraper-frontend",
               "budgets": [
                 {
@@ -51,6 +56,12 @@
               "outputHashing": "all"
             },
             "development": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.prod.ts",
+                  "with": "src/environments/environment.ts"
+                }
+              ],
               "outputPath": "dist/scraper-frontend",
               "optimization": false,
               "extractLicenses": false,
@@ -63,9 +74,9 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "scraper-frontend:build:production"
+              "buildTarget": "scraper-frontend:build:production"              
             },
-            "development": {
+            "development": {             
               "buildTarget": "scraper-frontend:build:development"
             }
           },
