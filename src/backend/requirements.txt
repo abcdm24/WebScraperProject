@@ -25,6 +25,7 @@ sqlite-fts4==1.0.3
 fastapi==0.115.0
 uvicorn[standard]==0.32.0
 gunicorn==23.0.0
+starlette==0.48.0
 
 # --- Utility & CLI ---
 click==8.2.1
