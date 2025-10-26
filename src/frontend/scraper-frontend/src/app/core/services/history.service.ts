@@ -21,7 +21,7 @@ export class HistoryService {
   private readonly API_URL = environment.apiUrl + 'history';
   //  'https://smart-scraper-backend.purplestone-f82c5670.eastus.azurecontainerapps.io/api/history';
 
-  constructor(private http: HttpClient) {}
+  constructor(private httpClient: HttpClient) {}
 
   getHistory(): Observable<ScrapeHistory[]> {
     //return this.http.get<ScrapeHistory[]>(this.API_URL);
@@ -42,10 +42,10 @@ export class HistoryService {
     //   },
     // ]);
     console.log('Fetching history from API:', this.API_URL);
-    return this.http.get<ScrapeHistory[]>(this.API_URL);
+    return this.httpClient.get<ScrapeHistory[]>(this.API_URL);
   }
 
   getById(id: string): Observable<ScrapeHistory> {
-    return this.http.get<ScrapeHistory>(`${this.API_URL}/${id}`);
+    return this.httpClient.get<ScrapeHistory>(`${this.API_URL}/${id}`);
   }
 }

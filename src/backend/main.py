@@ -7,9 +7,13 @@ from .routes.history_routes import router as history_router
 
 app = FastAPI(title="Webscraper API")
 
+origins = [
+    "http://localhost:4200",
+    "https://green-ocean-0c329510f.3.azurestaticapps.net"
+]
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://green-ocean-0c329510f.3.azurestaticapps.net"],     # * to allow any origin
+    allow_origins=origins,     # * to allow any origin
     allow_credentials=True,
     allow_methods=["*"],     # allow all HTTP methods
     allow_headers=["*"],     # allow all headers
