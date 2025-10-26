@@ -41,4 +41,4 @@ A simple Python-based web scraper with pagination and SQLAlchemy for persistence
 
 For details on deploying the SmartScraper FastAPI backend to Azure Container Apps and fixing HTTPS-related issues, see:
 
-➡️ [Azure FastAPI Deployment Notes](./docs/azure-deployment-notes.md)
+➡️ [Azure FastAPI Deployment Notes](./notes/azure-deployment-notes.md)
