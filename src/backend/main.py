@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from starlette.middleware.base import BaseHTTPMiddleware
-from starlette.middleware.proxy_headers import ProxyHeadersMiddleware
+from uvicorn.middleware.proxy_headers import ProxyHeadersMiddleware
 from fastapi.middleware.cors import CORSMiddleware
 from .routes.scraper_routes import router as scraper_router
 # from src.tests.conftest import API_PREFIX
