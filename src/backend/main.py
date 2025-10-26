@@ -1,11 +1,17 @@
 from fastapi import FastAPI
+from starlette.middleware.base import BaseHTTPMiddleware
+from starlette.middleware.proxy_headers import ProxyHeadersMiddleware
 from fastapi.middleware.cors import CORSMiddleware
 from .routes.scraper_routes import router as scraper_router
 # from src.tests.conftest import API_PREFIX
 from .utils.config import API_PREFIX
 from .routes.history_routes import router as history_router
+from fastapi.middleware.trustedhost import TrustedHostMiddleware
 
-app = FastAPI(title="Webscraper API")
+app = FastAPI(title="Smartscraper API")
+
+app.add_middleware(ProxyHeadersMiddleware, trusted_hosts="*")
+app.add_middleware(TrustedHostMiddleware, allowed_hosts=["*"])
 
 origins = [
     "http://localhost:4200",
